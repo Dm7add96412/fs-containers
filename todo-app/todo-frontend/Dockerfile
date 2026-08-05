@@ -1,4 +1,4 @@
-FROM node:24
+FROM node:24 AS build-stage
 
 WORKDIR /usr/src/app
 
@@ -7,8 +7,10 @@ COPY . .
 ENV VITE_BACKEND_URL=http://localhost:3000/
 
 RUN npm ci
+RUN npm test
 
 RUN npm run build
 
-RUN npm install -g serve
-CMD ["serve", "-n", "dist"]
+FROM nginx:1.29-alpine
+
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html

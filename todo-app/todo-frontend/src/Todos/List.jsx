@@ -1,5 +1,5 @@
 import React from 'react'
-import SingleTodo from './components/SingleTodo'
+import ToDo from './components/ToDo'
 
 const TodoList = ({ todos, deleteTodo, completeTodo }) => {
   const onClickDelete = (todo) => () => {
@@ -13,7 +13,7 @@ const TodoList = ({ todos, deleteTodo, completeTodo }) => {
   return (
     <>
       {todos.map(todo => 
-        <SingleTodo onClickComplete={onClickComplete} onClickDelete={onClickDelete} key={todo.text} todo={todo}/>
+        <ToDo onClickComplete={onClickComplete} onClickDelete={onClickDelete} key={todo.text} todo={todo}/>
       ).reduce((acc, cur) => [...acc, <hr />, cur], [])}
     </>
   )
